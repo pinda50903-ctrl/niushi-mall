@@ -1,0 +1,44 @@
+# 依赖与构建产物
+/app/vendor/
+/node_modules/
+
+# 运行时敏感文件（密钥、配置、本地环境）
+/app/.env
+/app/runtime/*
+!/app/runtime/.gitignore
+/app/config/jwt-key.php
+/app/web/.htaccess.local
+
+# 数据库（本地 SQLite 不入库）
+*.db
+*.sqlite
+*.sqlite3
+
+# 上传目录：保留演示用占位图（仓库 clone 后开箱即用），忽略后台上传的新文件
+/app/web/uploads/*
+!/app/web/uploads/demo.jpg
+!/app/web/uploads/banner-*.jpg
+!/app/web/uploads/goods-*.jpg
+!/app/web/uploads/detail-*.jpg
+!/app/web/uploads/cat-*.png
+
+# 日志与缓存
+*.log
+/.phpunit.cache/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+nbproject/
+.buildpath
+.project
+.settings/
+
+# 系统文件
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# 本地工具脚本（临时排查用，不属于交付物）
+/tools/tmp/

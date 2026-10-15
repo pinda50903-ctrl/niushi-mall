@@ -1,0 +1,8 @@
+﻿config\app.php
+config\console.php
+config\db.example.php
+config\db.php
+config\local.example.php
+config\local.php
+config\params.php
+config\web.php

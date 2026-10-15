@@ -1,0 +1,15 @@
+{
+    "name": "niushi/yii2-assets-stub",
+    "description": "Virtual provider for Yii2 frontend asset packages (API-only backend, assets served by separate frontends)",
+    "version": "1.0.0",
+    "type": "library",
+    "provide": {
+        "bower-asset/jquery": "*",
+        "bower-asset/punycode": "*",
+        "bower-asset/inputmask": "*",
+        "bower-asset/yii2-pjax": "*",
+        "bower-asset/bootstrap": "*",
+        "bower-asset/jquery.maskedinput": "*",
+        "npm-asset/jquery": "*"
+    }
+}
