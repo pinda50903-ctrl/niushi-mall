@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace app\plugins\customer_service\controllers;
 
-use app\plugins\PluginRestController;
+use app\plugins\ConfigAdminController;
 
 /**
- * 客服管理端接口：插件配置读写
+ * 在线客服管理端：插件配置
+ *
+ * 标准契约：GET config / POST save-config
  */
-final class AdminController extends PluginRestController
+final class AdminController extends ConfigAdminController
 {
     protected function pluginCode(): string
     {
         return 'customer_service';
     }
 
-    /** 读取插件配置 */
-    public function actionConfig(): \yii\web\Response
+    protected function serviceClass(): string
     {
-        return $this->ok([
-            'config' => \app\common\services\PluginSettingService::get($this->pluginCode(), $this->tenantId()),
-        ]);
-    }
-
-    /** 保存插件配置 */
-    public function actionSaveConfig(): \yii\web\Response
-    {
-        $value = (array)($this->input('config') ?? []);
-        \app\common\services\PluginSettingService::save($this->pluginCode(), $value, $this->tenantId());
-        return $this->ok(null, '客服配置已保存');
+        return \app\plugins\customer_service\services\CustomerServiceService::class;
     }
 }

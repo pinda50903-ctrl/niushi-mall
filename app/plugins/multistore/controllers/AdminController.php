@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace app\plugins\multistore\controllers;
 
-use app\plugins\PluginRestController;
+use app\plugins\ConfigAdminController;
 
 /**
- * 多门店管理端接口：插件配置读写
+ * 多门店管理端：插件配置
+ *
+ * 标准契约：GET config / POST save-config
  */
-final class AdminController extends PluginRestController
+final class AdminController extends ConfigAdminController
 {
     protected function pluginCode(): string
     {
         return 'multistore';
     }
 
-    /** 读取插件配置 */
-    public function actionConfig(): \yii\web\Response
+    protected function serviceClass(): string
     {
-        return $this->ok([
-            'config' => \app\common\services\PluginSettingService::get($this->pluginCode(), $this->tenantId()),
-        ]);
-    }
-
-    /** 保存插件配置 */
-    public function actionSaveConfig(): \yii\web\Response
-    {
-        $value = (array)($this->input('config') ?? []);
-        \app\common\services\PluginSettingService::save($this->pluginCode(), $value, $this->tenantId());
-        return $this->ok(null, '多门店配置已保存');
+        return \app\plugins\multistore\services\MultistoreService::class;
     }
 }

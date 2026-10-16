@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace app\plugins\member_level\controllers;
 
-use app\plugins\PluginRestController;
+use app\plugins\ConfigAdminController;
 
 /**
- * 会员等级管理端接口：插件配置读写
+ * 会员等级管理端：插件配置
+ *
+ * 标准契约：GET config / POST save-config
  */
-final class AdminController extends PluginRestController
+final class AdminController extends ConfigAdminController
 {
     protected function pluginCode(): string
     {
         return 'member_level';
     }
 
-    /** 读取插件配置 */
-    public function actionConfig(): \yii\web\Response
+    protected function serviceClass(): string
     {
-        return $this->ok([
-            'config' => \app\common\services\PluginSettingService::get($this->pluginCode(), $this->tenantId()),
-        ]);
-    }
-
-    /** 保存插件配置 */
-    public function actionSaveConfig(): \yii\web\Response
-    {
-        $value = (array)($this->input('config') ?? []);
-        \app\common\services\PluginSettingService::save($this->pluginCode(), $value, $this->tenantId());
-        return $this->ok(null, '会员等级配置已保存');
+        return \app\plugins\member_level\services\MemberLevelService::class;
     }
 }
